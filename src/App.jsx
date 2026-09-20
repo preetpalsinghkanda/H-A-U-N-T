@@ -1,8 +1,13 @@
 import React from 'react'
+import ScrollSmooth from './components/ScrollSmooth';
 
 const App = () => {
   return (
-    <div>App</div>
+    <div>
+      <ScrollSmooth/>
+      <div></div>
+
+    </div>
   )
 }
 
