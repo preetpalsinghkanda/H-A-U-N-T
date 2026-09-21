@@ -1,11 +1,18 @@
 @import 'tailwindcss';
 
-*{
+@theme {
+    --font-mouse: "Mouse Memoirs", sans-serif;
+    --font-livvic: "Livvic", sans-serif;
+    --font-momo: "Momo Trust Display", sans-serif;
+}
+
+* {
     box-sizing: border-box;
 }
 
-body{
+body {
     height: 100%;
     width: 100%;
-    
+    background-color: black;
+
 }
