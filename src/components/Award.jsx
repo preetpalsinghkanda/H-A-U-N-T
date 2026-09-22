@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import movie1 from "../assets/awards/img1.jpg";
 import movie2 from "../assets/awards/img2.jpg";
 import movie3 from "../assets/awards/img3.jpg";
@@ -11,6 +12,7 @@ const Award = () => {
 
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
+  const awardSectionRef = useRef(null);
 
   const [activeMovie, setActiveMovie] = useState(0);
 
@@ -56,7 +58,58 @@ const Award = () => {
   useEffect(() => {
     const image = imageRef.current;
     const section = sectionRef.current;
-  });
+    const awardSection = awardSectionRef.current;
+
+    if (!image || !section) return;
+
+    const y = gsap.quickTo(image, "y", {
+      ease: "power3.out",
+    });
+
+    const handleMouse = (e) => {
+      y(e.clientY - 400);
+    };
+
+    // const handleMouseEnter = () => {
+    //   gsap.fromTo(
+    //     imageRef.current,
+    //     {
+    //       opacity: 0,
+    //       scale: 0,
+    //       clipPath: "inset(50% 50% 50% 50%)",
+    //     },
+    //     {
+    //       opacity: 1,
+    //       scale: 1,
+    //       clipPath: "inset(0%  0% 0% 0%)",
+    //       duration: 0.4,
+    //     },
+    //   );
+
+     
+    // };
+
+     const handleMouseLeave =()=>{
+        gsap.fromTo(imageRef.current,{
+          opacity : 1,
+          scale:1 ,
+          clipPath : "inset(0% 0% 0% 0%)",
+          
+        },{
+          opacity : 0,
+          scale : 0 ,
+          clipPath : "inset(50% 50% 50% 50%)",
+          duration : 0.2
+
+        })
+      }
+
+    // const
+
+    section.addEventListener("mousemove", handleMouse);
+    // awardSection.addEventListener("mouseenter", handleMouseEnter);
+    awardSection.addEventListener("mouseleave",handleMouseLeave)
+  }, []);
 
   return (
     <div
@@ -67,11 +120,32 @@ const Award = () => {
         oscar winning
       </h2>
 
-      <div className="border mx-16 flex flex-col gap-5 border-white">
+      <div
+        ref={awardSectionRef}
+        className="border mx-16 pb-10 flex flex-col gap-5 border-white"
+      >
         {oscarMovies.map((oscarMovie) => (
           <div
+            onMouseEnter={() => {
+              setActiveMovie(oscarMovie.id - 1);
+              gsap.fromTo(
+                imageRef.current,
+                {
+                  opacity: 0,
+                  scale: 0,
+                  clipPath: "inset(50% 50% 50% 50%)",
+                },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  clipPath: "inset(0%  0% 0% 0%)",
+                  duration: 0.4,
+                },
+              );
+            }}
+            
             key={oscarMovie.id}
-            className="flex justify-between cursor-pointer hover:text-[#aca9a9] transition duration-75 text-[#535353]"
+            className={`flex award_section justify-between cursor-pointer hover:text-[#aca9a9] transition duration-75 text-[#535353]`}
           >
             <div className="flex  gap-12">
               <span
@@ -91,10 +165,16 @@ const Award = () => {
         ))}
       </div>
 
-      {/* <div ref={imageRef} className="absolute h-130 w-90 rounded-3xl overflow-hidden ">
-        <img className="h-full w-full object-cover" src={movie1} alt="" />
-
-      </div> */}
+      <div
+        ref={imageRef}
+        className="absolute right-90  opacity-0  h-130 w-90 rounded-3xl overflow-hidden "
+      >
+        <img
+          className="h-full w-full object-cover"
+          src={oscarMovies[activeMovie].img}
+          alt=""
+        />
+      </div>
     </div>
   );
 };
