@@ -9,7 +9,7 @@ import movie6 from "../assets/awards/img6.jpg";
 
 const Award = () => {
   // const []
-
+const firstImage = useRef(true)
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const awardSectionRef = useRef(null);
@@ -102,6 +102,8 @@ const Award = () => {
           duration : 0.2
 
         })
+
+        firstImage.current = true
       }
 
     // const
@@ -122,12 +124,16 @@ const Award = () => {
 
       <div
         ref={awardSectionRef}
-        className="border mx-16 pb-10 flex flex-col gap-5 border-white"
+        className=" mx-16 pb-10 flex flex-col gap-5 "
       >
         {oscarMovies.map((oscarMovie) => (
           <div
             onMouseEnter={() => {
               setActiveMovie(oscarMovie.id - 1);
+
+              if(firstImage.current){
+                firstImage.current = false 
+             
               gsap.fromTo(
                 imageRef.current,
                 {
@@ -141,7 +147,8 @@ const Award = () => {
                   clipPath: "inset(0%  0% 0% 0%)",
                   duration: 0.4,
                 },
-              );
+              );}
+
             }}
             
             key={oscarMovie.id}
@@ -167,7 +174,7 @@ const Award = () => {
 
       <div
         ref={imageRef}
-        className="absolute right-90  opacity-0  h-130 w-90 rounded-3xl overflow-hidden "
+        className="absolute pointer-events-none right-90  opacity-0  h-130 w-90 rounded-3xl overflow-hidden "
       >
         <img
           className="h-full w-full object-cover"

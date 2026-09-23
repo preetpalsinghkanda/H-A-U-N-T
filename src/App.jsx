@@ -1,23 +1,25 @@
-import React from 'react'
-import ScrollSmooth from './components/ScrollSmooth';
-import SideSlider from './components/SideSlider'
-import Navbar from './components/Navbar';
-import Award from './components/Award';
+import React from "react";
+import ScrollSmooth from "./components/ScrollSmooth";
+import SideSlider from "./components/SideSlider";
+import Navbar from "./components/Navbar";
+import Award from "./components/Award";
+import Para from "./components/Para";
 
 const App = () => {
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-auto w-full overflow-hidden">
       {/* <SideSlider/> */}
-    <div>
-      <ScrollSmooth/>
+      <div>
+        <ScrollSmooth />
+{/* 
+        <Navbar />
 
-      <Navbar/>
+        <Award /> */}
 
-      <Award/>
-      
+        <Para />
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
