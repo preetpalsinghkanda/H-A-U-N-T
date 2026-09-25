@@ -16,11 +16,27 @@ const Para = () => {
   // const
 
   useEffect(() => {
+    const live = imageRef.current.map(() => ({
+      x: 0,
+      y: 0,
+      rotateX: 0,
+      rotateY: 0,
+    }));
+
+    const aim = imageRef.current.map(() => ({
+      x: 0,
+      y: 0,
+      rotateX: 0,
+      rotateY: 0,
+    }));
+
     imageRef.current.forEach((img) => {
       gsap.set(img, {
         opacity: 0,
         scale: 0,
         clipPath: "inset(50%,50%,50%,50%)",
+        transformPerspective: 800,
+        transformOrigin: "center center",
       });
     });
 
@@ -31,9 +47,12 @@ const Para = () => {
         const X = position.left + position.width / 2;
         const Y = position.top + position.height / 2;
 
-        const dis = Math.hypot(x.clientX - X, x.clientY - Y);
+        const offX = x.clientX - X;
+        const offY = x.clientY - Y;
 
-        if (dis < 90 && !isActive.current[i]) {
+        const dis = Math.hypot(offX, offY);
+
+        if (dis < 110 && !isActive.current[i]) {
           isActive.current[i] = true;
           gsap.killTweensOf(imageRef.current[i]);
 
@@ -50,7 +69,7 @@ const Para = () => {
           );
         }
 
-        if (dis >= 90 && isActive.current[i]) {
+        if (dis >= 110 && isActive.current[i]) {
           isActive.current[i] = false;
 
           gsap.killTweensOf(imageRef.current[i]);
@@ -58,17 +77,50 @@ const Para = () => {
           gsap.to(imageRef.current[i], {
             opacity: 0,
             scale: 0,
+
             clipPath: "inset(50%,50%,50%,50%)",
             duration: 0.4,
             ease: "power3.in",
           });
         }
+
+        if (dis < 110) {
+          const ratioX = Math.max(-1, Math.min(1, offX / 110));
+          const ratioY = Math.max(-1, Math.min(1, offY / 110));
+
+          aim[i].x = offX * 0.28;
+          aim[i].y = offY * 0.28;
+
+          aim[i].rotateY = ratioX * -15;
+          aim[i].rotateX = ratioY * 15;
+        }
+      });
+    };
+
+    const frame = () => {
+      imageRef.current.forEach((img, i) => {
+        if (!img) return;
+
+        live[i].x += (aim[i].x - live[i].x) * 0.12;
+        live[i].y += (aim[i].y - live[i].y) * 0.12;
+
+        live[i].rotateX += (aim[i].rotateX - live[i].rotateX) * 0.12;
+        live[i].rotateY += (aim[i].rotateY - live[i].rotateY) * 0.12;
+
+        gsap.set(img, {
+          x: live[i].x,
+          y: live[i].y,
+          rotateX: live[i].rotateX,
+          rotateY: live[i].rotateY,
+        });
       });
     };
 
     window.addEventListener("mousemove", handleMouse);
+    gsap.ticker.add(frame);
     return () => {
       window.removeEventListener("mousemove", handleMouse);
+      gsap.ticker.remove(frame);
     };
   }, []);
 
@@ -85,7 +137,7 @@ const Para = () => {
           >
             <span
               ref={(e) => (imageRef.current[0] = e)}
-              className="h-60   -right-40  w-80 absolute  -top-25 rounded-2xl overflow-hidden"
+              className="h-60 border-2 border-[#f8f8f8]  -right-40  w-80 absolute  -top-25 rounded-2xl overflow-hidden"
             >
               <img
                 className="h-full w-full object-cover "
@@ -106,13 +158,13 @@ const Para = () => {
           home
           <span
             ref={(e) => (dotRef.current[1] = e)}
-            className=" relative mx-8 cursor-pointer inline-block h-7 w-12 rounded-lg  bg-white"
+            className=" relative mx-8 cursor-pointer inline-block h-7 w-12 rounded-lg   bg-white"
           >
             <span
               ref={(e) => {
                 imageRef.current[1] = e;
               }}
-              className="h-60   w-80 absolute -right-36  -top-28 rounded-2xl overflow-hidden"
+              className="h-60 border-2 border-[#f8f8f8]  w-80 absolute -right-36  -top-28 rounded-2xl overflow-hidden"
             >
               <img
                 className="h-full w-full object-cover "
@@ -139,7 +191,7 @@ const Para = () => {
           >
             <span
               ref={(e) => (imageRef.current[2] = e)}
-              className="h-60 inline-block  w-80 absolute -left-35 -top-28 rounded-2xl overflow-hidden"
+              className="h-60 border-2 border-[#f8f8f8] inline-block  w-80 absolute -left-35 -top-28 rounded-2xl overflow-hidden"
             >
               <img
                 className="h-full w-full object-cover "
