@@ -4,6 +4,7 @@ import SideSlider from "./components/SideSlider";
 import Navbar from "./components/Navbar";
 import Award from "./components/Award";
 import Para from "./components/Para";
+import TextScroll from "./components/TextScroll";
 
 const App = () => {
   return (
@@ -11,10 +12,12 @@ const App = () => {
       {/* <SideSlider/> */}
       <div>
         <ScrollSmooth />
-{/* 
+
         <Navbar />
 
-        <Award /> */}
+        <Award /> 
+
+        <TextScroll/>
 
         <Para />
       </div>
