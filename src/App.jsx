@@ -6,6 +6,7 @@ import Award from "./components/Award";
 import Para from "./components/Para";
 import TextScroll from "./components/TextScroll";
 import Transition from "./components/Transition";
+import Category from "./components/Category";
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
         <Award />
 
         {/* <TextScroll/> */}
+
+        <Category/>
 
         <Para />
 
