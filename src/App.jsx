@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Award from "./components/Award";
 import Para from "./components/Para";
 import TextScroll from "./components/TextScroll";
+import Transition from "./components/Transition";
 
 const App = () => {
   return (
@@ -15,11 +16,13 @@ const App = () => {
 
         <Navbar />
 
-        <Award /> 
+        <Award />
 
-        <TextScroll/>
+        {/* <TextScroll/> */}
 
         <Para />
+
+        <Transition />
       </div>
     </div>
   );

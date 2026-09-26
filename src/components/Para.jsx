@@ -113,6 +113,16 @@ const Para = () => {
           rotateX: live[i].rotateX,
           rotateY: live[i].rotateY,
         });
+
+        // const image = img.querySelector("img")
+
+        // if(image){
+        //   gsap.set(image,{
+        //     x: -live[i].x * 1.5,
+        //     y:-live[i].y*1.5,
+        //   })
+        // }
+
       });
     };
 
