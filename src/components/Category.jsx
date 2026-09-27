@@ -91,15 +91,6 @@ const Category = () => {
   const itemRefs = useRef([]);
   const cardRefs = useRef([]);
 
-  useLayoutEffect(()=>{
-
-    const movieName = itemRefs.current
-    const movie
-
-    // gsap.set()
-
-  },[])
-
   useEffect(() => {
     const fetchMoviesPoster = async () => {
       const allPosters = cat.flatMap((category) => category.movies);
@@ -129,6 +120,53 @@ const Category = () => {
     fetchMoviesPoster();
   }, []);
 
+  useLayoutEffect(() => {
+    const movieName = itemRefs.current;
+    const movieCard = cardRefs.current;
+    const list = listRef.current;
+
+    gsap.set(movieCard, {
+      scale: 0,
+    });
+
+    const positionCards = (i) => {
+      const movies = cat[i].movies;
+
+      movieCard.forEach((card, cardI) => {
+        const movie = movies[cardI];
+        const poster = movieImgs[movie];
+
+        if (poster) {
+          card.src = `https://image.tmdb.org/t/p/w500${poster}`;
+        }
+
+        gsap.to(card, {
+          x: gsap.utils.random(-100, 100),
+          y: gsap.utils.random(-50, 60),
+          duration: 0.8,
+          ease: "elastic.out(1,0.5)",
+        });
+      });
+    };
+
+    movieName.forEach((i, itemI) => {
+      const handleMouseEnter = () => {
+        positionCards(itemI);
+
+        gsap.to(movieCard, {
+          scale: 1,
+          duration: 0.7,
+          ease: "elastic.out(1,0.6)",
+        });
+      };
+
+      const handleMouseLeave = () => {};
+
+      i.addEventListener("mouseenter", handleMouseEnter);
+      i.addEventListener("mouseleave", handleMouseLeave);
+    });
+  }, [movieImgs]);
+
   return (
     <div className=" text-white  px-30 ">
       {/* container */}
@@ -144,7 +182,6 @@ const Category = () => {
             {[0, 1, 2, 3].map((_, i) => (
               <img
                 key={i}
-
                 ref={(x) => {
                   cardRefs.current[i] = x;
                 }}
@@ -184,7 +221,7 @@ const Category = () => {
           {/* list  */}
           <div
             ref={listRef}
-            className="flex flex-col justify-center items-center gap-3 font-extrabold"
+            className="flex flex-col justify-center items-center font-extrabold"
           >
             {/* items */}
 
@@ -194,11 +231,16 @@ const Category = () => {
                 ref={(x) => {
                   itemRefs.current[i] = x;
                 }}
-                className="flex w-full justify-center items-center "
+                className="flex h-[90px] w-full justify-center items-center "
               >
-                <span className="place-items-center">
-                  <h4 className="text-7xl font-momo text-black ">{c.name}</h4>
-                </span>
+                <div className="place-items-center">
+                  <h4
+                    className="text-7xl font-momo text-[#0000009c] duration-400
+                  transition-transform hover:font-mouse cursor-pointer hover:my-3 hover:text-black hover:scale-x-[1.08]"
+                  >
+                    {c.name}
+                  </h4>
+                </div>
               </div>
             ))}
           </div>
