@@ -1,7 +1,7 @@
 import React from "react";
 import gsap from "gsap";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import img1 from "../assets/hereditary_img.jpg";
+// import img1 from "../assets/hereditary_img.jpg";
 
 const Category = () => {
   const cat = [
@@ -91,6 +91,15 @@ const Category = () => {
   const itemRefs = useRef([]);
   const cardRefs = useRef([]);
 
+  const stageRef = useRef(null);
+
+  const preCardPosition = [
+    { cx: -400, cy: -150 },
+    { cx: 400, cy: -150 },
+    { cx: -400, cy: 250 },
+    { cx: 400, cy: 250 },
+  ];
+
   useEffect(() => {
     const fetchMoviesPoster = async () => {
       const allPosters = cat.flatMap((category) => category.movies);
@@ -129,8 +138,14 @@ const Category = () => {
       scale: 0,
     });
 
-    const positionCards = (i) => {
+    const positionCards = (i, item1) => {
       const movies = cat[i].movies;
+
+      const itemRect = item1.getBoundingClientRect();
+      const stageRect = stageRef.current.getBoundingClientRect();
+
+      const itemCenterX = itemRect.left + itemRect.width / 2 - stageRect.left;
+      const itemCenterY = itemRect.top + itemRect.height / 2 - stageRect.top;
 
       movieCard.forEach((card, cardI) => {
         const movie = movies[cardI];
@@ -140,18 +155,26 @@ const Category = () => {
           card.src = `https://image.tmdb.org/t/p/w500${poster}`;
         }
 
+        const positionCard = preCardPosition[cardI];
+
+        const randomRotation = gsap.utils.random(-8, 8);
+
         gsap.to(card, {
-          x: gsap.utils.random(-100, 100),
-          y: gsap.utils.random(-50, 60),
+          left: itemCenterX + positionCard.cx + gsap.utils.random(-50, 90),
+          top: itemCenterY + positionCard.cy + gsap.utils.random(-50, 90),
+          xPercent: -50,
+          yPercent: -50,
+          rotation: randomRotation,
           duration: 0.8,
           ease: "elastic.out(1,0.5)",
+          overwrite: "auto",
         });
       });
     };
 
     movieName.forEach((i, itemI) => {
       const handleMouseEnter = () => {
-        positionCards(itemI);
+        positionCards(itemI, i);
 
         gsap.to(movieCard, {
           scale: 1,
@@ -170,13 +193,16 @@ const Category = () => {
   return (
     <div className=" text-white  px-30 ">
       {/* container */}
-      <div className="w-full pt-22 pb-30 border  relative h-full rounded-4xl flex justify-center items-center bg-[#ffffffcd]  text-center overflow-hidden gap-2 flex-col">
+      <div className="w-full pt-22 pb-30   relative h-full rounded-4xl flex justify-center items-center bg-[#ffffffcd]  text-center overflow-hidden  flex-col">
         <p className="text-2xl mb-10 font-semibold italic text-[#A6A6A6] font-livvic">
           Explore the collection
         </p>
 
         {/* stage */}
-        <div className="w-full flex items-center justify-center relative ">
+        <div
+          ref={stageRef}
+          className="w-full flex items-center justify-center relative "
+        >
           {/* cards */}
           <div className="absolute inset-0 pointer-events-none">
             {[0, 1, 2, 3].map((_, i) => (
@@ -221,7 +247,7 @@ const Category = () => {
           {/* list  */}
           <div
             ref={listRef}
-            className="flex flex-col justify-center items-center font-extrabold"
+            className="flex flex-col   justify-center items-center font-extrabold"
           >
             {/* items */}
 
@@ -231,12 +257,12 @@ const Category = () => {
                 ref={(x) => {
                   itemRefs.current[i] = x;
                 }}
-                className="flex h-[90px] w-full justify-center items-center "
+                className="flex h-[90px]  w-full justify-center items-center "
               >
-                <div className="place-items-center">
+                <div className="place-items-center cursor-pointer  ">
                   <h4
-                    className="text-7xl font-momo text-[#0000009c] duration-400
-                  transition-transform hover:font-mouse cursor-pointer hover:my-3 hover:text-black hover:scale-x-[1.08]"
+                    className="text-7xl font-momo  flex items-center justify-center    text-[#0000009c] duration-400
+                  transition-transform hover:font-mouse    hover:text-black  hover:scale-x-[1.55]"
                   >
                     {c.name}
                   </h4>
