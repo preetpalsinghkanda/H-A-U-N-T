@@ -7,6 +7,7 @@ import Para from "./components/Para";
 import TextScroll from "./components/TextScroll";
 import Transition from "./components/Transition";
 import Category from "./components/Category";
+import Video from "./components/Video";
 
 const App = () => {
   return (
@@ -17,13 +18,15 @@ const App = () => {
 
         <Navbar />
 
-        <Award />
+        {/* <Award /> */}
 
         {/* <TextScroll/> */}
 
-        <Category/>
+        {/* <Category/> */}
+        
 
         <Para />
+        <Video/>
 
         <Transition />
       </div>
