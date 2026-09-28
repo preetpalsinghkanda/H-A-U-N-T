@@ -8,10 +8,13 @@ import TextScroll from "./components/TextScroll";
 import Transition from "./components/Transition";
 import Category from "./components/Category";
 import Video from "./components/Video";
+import cursor from "../public/cursor.png"
+import movieChar from "./assets/char.jpg"
+import HorrorMovie from "./components/HorrorMovie";
 
 const App = () => {
   return (
-    <div className="relative h-auto w-full overflow-hidden">
+    <div style={{cursor : `url(${cursor})  , auto`}} className="relative h-auto w-full overflow-hidden">
       {/* <SideSlider/> */}
       <div>
         <ScrollSmooth />
@@ -24,11 +27,14 @@ const App = () => {
 
         {/* <Category/> */}
         
+        <HorrorMovie/>
 
         <Para />
         <Video/>
 
+        <img src={movieChar} className="w-full " alt="" />
         <Transition />
+
       </div>
     </div>
   );

@@ -135,7 +135,7 @@ const Para = () => {
   }, []);
 
   return (
-    <div className="text-white my-20  flex items-center justify-center">
+    <div className="text-[#ffffffb5] my-20  flex items-center justify-center">
       <p className="uppercase   font-livvic font-extrabold flex text-center flex-col text-7xl">
         <span>we're building</span>
         <span className="flex items-center  gap-4">
@@ -143,7 +143,7 @@ const Para = () => {
           night
           <span
             ref={(e) => (dotRef.current[0] = e)}
-            className=" relative cursor-pointer perspective-[800px] mx-8  h-7 w-12 rounded-lg  bg-white"
+            className=" relative cursor-pointer perspective-[800px] mx-8  h-7 w-12 rounded-lg  bg-[#f8f3f2cf]"
           >
             <span
               ref={(e) => (imageRef.current[0] = e)}
@@ -168,7 +168,7 @@ const Para = () => {
           home
           <span
             ref={(e) => (dotRef.current[1] = e)}
-            className=" relative mx-8 cursor-pointer inline-block h-7 w-12 rounded-lg   bg-white"
+            className=" relative mx-8 cursor-pointer inline-block h-7 w-12 rounded-lg   bg-[#f8f3f2cf]"
           >
             <span
               ref={(e) => {
@@ -197,7 +197,7 @@ const Para = () => {
           un
           <span
             ref={(e) => (dotRef.current[2] = e)}
-            className=" relative cursor-pointer  inline-block h-7 mx-8 w-12 rounded-lg  bg-white"
+            className=" relative cursor-pointer  inline-block h-7 mx-8 w-12 rounded-lg  bg-[#f8f3f2cf]"
           >
             <span
               ref={(e) => (imageRef.current[2] = e)}
