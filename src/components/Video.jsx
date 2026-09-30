@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from "react";
-import horrorVideo from "../assets/EDIT.mp4";
+import horrorVideo from "../assets/edit.mp4";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
