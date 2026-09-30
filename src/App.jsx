@@ -15,11 +15,15 @@ import { Route, Routes } from "react-router-dom";
 import { Howl } from "howler";
 import sound from "./assets/sound.mp3";
 import Search from "./components/Search";
+import TextHome from "./components/TextHome";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 const Home = () => {
   return (
     <>
-    <Navbar/>
+      <Navbar />
+      <TextHome />
       <HorrorMovie />
       <Award />
       <Video />
@@ -60,7 +64,9 @@ const App = () => {
       {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/search" element={<Search/>} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );

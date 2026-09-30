@@ -73,7 +73,7 @@ const SideSlider = ({ movie, setCheckMovie }) => {
             <div className="flex w-full flex items-center  font-momo gap-2 flex-col">
               <div className="flex gap-4 items-center justify-center">
                 {" "}
-                <h2 className="z-11    text-5xl">{movie.title}</h2>
+                <h2 className="z-11  text-center  text-5xl">{movie.title}</h2>
                 <span className="self-center rounded-2xl border px-3 text-lg   font-[100]">
                   {movie.vote_average?.toFixed(1)}
                 </span>

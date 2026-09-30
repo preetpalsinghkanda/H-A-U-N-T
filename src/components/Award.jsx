@@ -117,7 +117,7 @@ const firstImage = useRef(true)
     <div
     id="oscar"
       ref={sectionRef}
-      className="text-white my-30 flex flex-col gap-12    mx-auto"
+      className="text-white mt-60 my-30 flex flex-col gap-12    mx-auto"
     >
       <h2 className="uppercase mx-30 font-mouse text-5xl text-[#666666]">
         oscar winning

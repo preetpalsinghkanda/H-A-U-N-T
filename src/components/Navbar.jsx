@@ -51,7 +51,7 @@ const Navbar = () => {
         <img src={logo} className="h-9" alt="" />
         <p
           style={{ fontFamily: "Momo Trust Display" }}
-          className="text-4xl [-webkit-text-stroke:3.5px] text-[#A6A6A6]"
+          className="text-4xl hidden [-webkit-text-stroke:3.5px] text-[#A6A6A6]"
         >
           HAUNT
         </p>
