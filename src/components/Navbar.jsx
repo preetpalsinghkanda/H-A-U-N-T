@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import logo from "../assets/logo.svg";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   // const underlineRef = useRef(null);
 
   // useEffect(() => {
@@ -57,6 +61,19 @@ const Navbar = () => {
           className="relative  cursor-pointer "
         >
           <p className="hover:text-white  ">Oscar</p>
+          <span
+            // ref={underlineRef}
+            className="absolute underline h-[1px] -bottom-0 w-[100%] left-0 opacity-0  bg-white"
+          ></span>
+        </div>
+
+        <div
+          onClick={() => (window.location.href = "/search")}
+          onMouseEnter={cursorEnter}
+          onMouseLeave={cursorLeave}
+          className="relative cursor-pointer  "
+        >
+          <p className="hover:text-white  ">Search</p>
           <span
             // ref={underlineRef}
             className="absolute underline h-[1px] -bottom-0 w-[100%] left-0 opacity-0  bg-white"

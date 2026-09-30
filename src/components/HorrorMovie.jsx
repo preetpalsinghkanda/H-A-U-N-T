@@ -35,7 +35,7 @@ const HorrorMovie = () => {
       gsap.to(item, {
         x: `-=${posterTotalWidth}`,
         repeat: -1,
-        duration: 25,
+        duration: 55,
         ease: "none",
         modifiers: {
           x: gsap.utils.unitize((x) => {
