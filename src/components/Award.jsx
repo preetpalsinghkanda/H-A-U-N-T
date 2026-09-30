@@ -115,6 +115,7 @@ const firstImage = useRef(true)
 
   return (
     <div
+    id="oscar"
       ref={sectionRef}
       className="text-white my-30 flex flex-col gap-12    mx-auto"
     >
@@ -128,6 +129,7 @@ const firstImage = useRef(true)
       >
         {oscarMovies.map((oscarMovie) => (
           <div
+          
             onMouseEnter={() => {
               setActiveMovie(oscarMovie.id - 1);
 

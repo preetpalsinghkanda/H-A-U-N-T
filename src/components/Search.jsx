@@ -2,12 +2,14 @@ import React, { useRef, useState } from "react";
 import wallpaper from "../assets/wallpaper.jpg";
 import Navbar from "./Navbar";
 import gsap from "gsap";
-import img1 from "../assets/hereditary_img.jpg";
+import SideSlider from "./SideSlider";
+// import img1 from "../assets/hereditary_img.jpg";
 
 const Search = () => {
   // const nameRef = useRef(null);
   const [movieList, setMovieList] = useState([]);
   const [input, setInput] = useState("");
+  const [checkMovie, setCheckMovie] = useState(null);
 
   const movieSearch = async (input) => {
     if (!input.trim()) {
@@ -44,7 +46,9 @@ const Search = () => {
       <div className="relative z-2">
         <Navbar />
 
-        <div className="mx-auto my-30 w-fit  ">
+        <div className="mx-auto  flex flex-col justify-center items-center gap-4 my-24 w-fit  ">
+
+          <h5 className=" text-[#ffffff46] font-livvic text-2xl">Your next nightmare is just a search away</h5>
           <div className="shadow-lg bg-[#ffffffba] flex rounded-full w-fit">
             <input
               value={input}
@@ -70,9 +74,12 @@ const Search = () => {
           </div>
         </div>
 
-        <div className=" mx-auto w-[60vw] grid grid-cols-3">
+        <div className=" mx-auto  w-[60vw] grid grid-cols-3">
           {movieList.map((movie) => (
-            <div className="  gap-1 flex items-center flex-col">
+            <div
+              onClick={() => setCheckMovie(movie)}
+              className="  gap-1 flex items-center flex-col"
+            >
               <img
                 className="h-80 rounded-2xl w-auto"
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -85,6 +92,10 @@ const Search = () => {
           ))}
         </div>
       </div>
+
+      {checkMovie && (
+        <SideSlider movie={checkMovie} setCheckMovie={setCheckMovie} />
+      )}
     </div>
   );
 };
